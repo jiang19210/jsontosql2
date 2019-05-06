@@ -1,6 +1,6 @@
 "use strict";
 const strings = require('./lib/strings');
-const mysql = require('mysql');
+const sqlstring = require('sqlstring');
 
 exports.toSelectSql = function (collection) {
     let where = collection.where;
@@ -26,7 +26,7 @@ exports.toSelectSql = function (collection) {
             }
         }
     }
-    sql = mysql.format(sql, fields);
+    sql = sqlstring.format(sql, fields);
     if (collection.sort) {
         sql += ' ORDER BY ' + collection.sort
     }
@@ -67,7 +67,7 @@ exports.toInsertSql = function (collection) {
         }
     }
     sql = strings.reEndComma(sql, ',');
-    sql = mysql.format(sql, fields);
+    sql = sqlstring.format(sql, fields);
     return sql;
 };
 
@@ -97,7 +97,7 @@ exports.toUpdateSql = function (collection) {
             }
         }
     }
-    sql = mysql.format(sql, fields);
+    sql = sqlstring.format(sql, fields);
     return sql;
 };
 
@@ -121,6 +121,6 @@ exports.toDeleteSql = function (collection) {
             }
         }
     }
-    sql = mysql.format(sql, fields);
+    sql = sqlstring.format(sql, fields);
     return sql;
 };
