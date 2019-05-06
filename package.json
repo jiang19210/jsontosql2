@@ -1,6 +1,6 @@
 {
   "name": "jsontosql2",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "start": "node test/test"
   },
@@ -14,5 +14,9 @@
   "dependencies": {
     "mysql": "2.17.1"
   },
-  "description": "converts json to sql"
+  "description": "converts json to sql",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jiang19210/jsontosql2"
+  }
 }
