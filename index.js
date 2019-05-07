@@ -7,6 +7,9 @@ exports.toSelectSql = function (collection) {
     let name = collection.name;
     let column = collection.column;
     let fields = [name];
+    if (!name) {
+        throw new Error('name is not null');
+    }
 
     let sql = "SELECT * FROM ??";
     if (column) {
@@ -40,6 +43,12 @@ exports.toInsertSql = function (collection) {
     let name = collection.name;
     let data = collection.data;
     let duplicate = collection.duplicate;
+    if (!name) {
+        throw new Error('name is not null');
+    }
+    if (!data) {
+        throw new Error('data is not null');
+    }
 
     let fields = [name];
     let a = 'INSERT INTO ?? (';
@@ -75,6 +84,15 @@ exports.toUpdateSql = function (collection) {
     let name = collection.name;
     let data = collection.data;
     let where = collection.where;
+
+    if (!name) {
+        throw new Error('name is not null');
+    }
+
+    if (!data) {
+        throw new Error('data is not null');
+    }
+
     let fields = [name];
     let sql = 'UPDATE ?? SET ';
     for (let key in data) {
@@ -104,6 +122,11 @@ exports.toUpdateSql = function (collection) {
 exports.toDeleteSql = function (collection) {
     let where = collection.where;
     let name = collection.name;
+
+    if (!name) {
+        throw new Error('name is not null');
+    }
+
     let fields = [name];
 
     let sql = "DELETE FROM ??";

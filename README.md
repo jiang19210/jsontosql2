@@ -82,11 +82,11 @@ collection = {
         'Id':1
     },
     'sort' : 'Id, Price DESC',
-    'limit' : 10
+    'limit' : '0, 1'
 };
 sql = index.toSelectSql(collection);
 console.log('JsonToSelectSql，增加排序和limit条件：' + sql);
-//SELECT * FROM `OrderInfo` WHERE  `Id` = 1  ORDER BY Id, Price DESC LIMIT 10
+//SELECT * FROM `OrderInfo` WHERE  `Id` = 1  ORDER BY Id, Price DESC LIMIT 0, 1
 
 //////====================================================================
 collection = {

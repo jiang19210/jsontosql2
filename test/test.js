@@ -61,7 +61,7 @@ collection = {
         'Id':1
     },
     'sort' : 'Id, Price DESC',
-    'limit' : 10
+    'limit' : '0, 1'
 };
 sql = index.toSelectSql(collection);
 console.log('JsonToSelectSql，增加排序和limit条件：' + sql);
