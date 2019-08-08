@@ -50,17 +50,20 @@ exports.toInsertSql = function (collection) {
         throw new Error('data is not null');
     }
 
+    let insertFields = [];
     let fields = [name];
     let a = 'INSERT INTO ?? (';
     for (let key in data[0]) {
         fields.push(key);
+        insertFields.push(key);
         a += '??,';
     }
     let sql = strings.reEndComma(a, ',') + ') VALUES ';
-    var values = '(';
+    let values = '(';
     for (let i = 0; i < data.length; i++) {
         let pair = data[i];
-        for (let key in pair) {
+        for (let j = 0; j < insertFields.length; j++) {
+            let key = insertFields[j];
             fields.push(pair[key]);
             values += '?,';
         }
@@ -71,7 +74,7 @@ exports.toInsertSql = function (collection) {
     if (duplicate) {
         sql = strings.reEndComma(sql, ',');
         sql += ' ON DUPLICATE KEY UPDATE ';
-        for (var i = 0; i < duplicate.length; i++) {
+        for (let i = 0; i < duplicate.length; i++) {
             sql += duplicate[i] + '=VALUES(' + duplicate[i] + '),';
         }
     }
