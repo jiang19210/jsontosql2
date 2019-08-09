@@ -43,6 +43,7 @@ exports.toInsertSql = function (collection) {
     let name = collection.name;
     let data = collection.data;
     let duplicate = collection.duplicate;
+    let columns = collection.columns;
     if (!name) {
         throw new Error('name is not null');
     }
@@ -53,11 +54,20 @@ exports.toInsertSql = function (collection) {
     let insertFields = [];
     let fields = [name];
     let a = 'INSERT INTO ?? (';
-    for (let key in data[0]) {
-        fields.push(key);
-        insertFields.push(key);
-        a += '??,';
+    if (columns) {
+        for (let i = 0; i < columns.length; i ++) {
+            fields.push(columns[i]);
+            insertFields.push(columns[i]);
+            a += '??,';
+        }
+    } else {
+        for (let key in data[0]) {
+            fields.push(key);
+            insertFields.push(key);
+            a += '??,';
+        }
     }
+
     let sql = strings.reEndComma(a, ',') + ') VALUES ';
     let values = '(';
     for (let i = 0; i < data.length; i++) {
